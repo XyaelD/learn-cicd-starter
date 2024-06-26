@@ -30,6 +30,15 @@ func TestGetAPIKey(t *testing.T) {
 			want: "",
 			err:  ErrNoAuthHeaderIncluded,
 		},
+		"not formatted correctly": {
+			input: func() http.Header {
+				h := http.Header{}
+				h.Set("Authorization", "test_key")
+				return h
+			}(),
+			want: "",
+			err:  ErrMalformedAuthHeader,
+		},
 	}
 
 	for name, tc := range tests {
