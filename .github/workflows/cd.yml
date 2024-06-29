@@ -33,6 +33,9 @@ jobs:
     - name: 'Set up Cloud SDK'
       uses: 'google-github-actions/setup-gcloud@v2'
 
+    - name: List files for debugging
+      run: ls -al
+
     - name: 'Use gcloud CLI'
       run: 'gcloud info'
       
