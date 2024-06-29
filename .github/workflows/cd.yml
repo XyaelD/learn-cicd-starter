@@ -21,26 +21,16 @@ jobs:
         - name: Build app
           run: ./scripts/buildprod.sh
 
-  notely-427919:
-    name: Authenticate and Setup Cloud SDK
-    runs-on: ubuntu-latest
-    steps:
-    - name: Check out code
-      uses: actions/checkout@v4
-      
-    - id: 'auth'
-      uses: 'google-github-actions/auth@v2'
-      with:
-        credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+        - id: 'auth'
+          uses: 'google-github-actions/auth@v2'
+          with:
+            credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
 
-    - name: 'Set up Cloud SDK'
-      uses: 'google-github-actions/setup-gcloud@v2'
+        - name: 'Set up Cloud SDK'
+          uses: 'google-github-actions/setup-gcloud@v2'
 
-    - name: List files for debugging
-      run: ls -al
-
-    - name: 'Use gcloud CLI'
-      run: 'gcloud info'
-      
-    - name: Cloud build
-      run: gcloud builds submit --tag northamerica-northeast2-docker.pkg.dev/notely-427919/notely-ar-repo/notely:latest .
+        - name: 'Use gcloud CLI'
+          run: 'gcloud info'
+          
+        - name: Cloud build
+          run: gcloud builds submit --tag northamerica-northeast2-docker.pkg.dev/notely-427919/notely-ar-repo/notely:latest .
